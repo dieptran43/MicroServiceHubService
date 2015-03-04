@@ -17,5 +17,8 @@ class MicroService(models.Model):
     maturity = models.PositiveIntegerField()
     owner = models.PositiveIntegerField(help_text="User ID of the person responsible for this service")
 
+    has_integration_tests = models.BooleanField(default=False)
+    has_initial_test_data = models.BooleanField(default=False)
+
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MicroService Hub</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+  </head>
+  <body>
+    <div class="container">
+
+      <div class="page-header">
+        <h1>ServiceHub <small>all the microservices</small></h1>
+      </div>
+
+
+      {% for service in services %}
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              {{service.title}}
+              <span class="badge pull-right">{{service.maturity}}</span>
+            </h3>
+          </div>
+          <div class="panel-body">
+            <dl>
+              <dt>Repo</dt>
+              <dd>{{service.repo_url|urlize|default_if_none:'n/a'}}</dd>
+
+              <dt>Docs</dt>
+              <dd>{{service.documentation_url|urlize|default_if_none:'n/a'}}</dd>
+
+              <dt>API Explorer</dt>
+              <dd>{{service.api_explorer_url|urlize|default_if_none:'n/a'}}</dd>
+
+              <dt>Staging</dt>
+              <dd>{{service.staging_url|urlize|default_if_none:'n/a'}}</dd>
+
+              <dt>Live</dt>
+              <dd>{{service.live_url|urlize|default:'n/a'}}</dd>
+
+            </dl>
+            <hr/>
+            <dl class="dl-horizontal">
+              <dt>Integration tests</dt>
+              <dd>
+                <span class='glyphicon glyphicon-{{service.has_integration_tests|yesno:'ok,remove'}}'></span>
+              </dd>
+
+              <dt>Initial test data provided</dt>
+              <dd>
+                <span class='glyphicon glyphicon-{{service.has_initial_test_data|yesno:'ok,remove'}}'></span>
+              </dd>
+            </dl>
+
+
+
+
+          </div>
+          <div class="panel-footer">
+            <a href='http://jenkins.tangentme.com/job/Build%20ServiceHub/3/'><img src='http://jenkins.tangentme.com/buildStatus/icon?job=Build ServiceHub&build=3'></a>            
+          </div>
+        </div>
+      </div>
+      
+      {% endfor %}
+
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  </body>
+</html>
