@@ -148,3 +148,4 @@ SWAGGER_SETTINGS = {
 }
 
 STATIC_ROOT = '/srv/static/microservicehubservice/static/'
+
